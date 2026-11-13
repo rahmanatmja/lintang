@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:;" />
+  <title>Lintang</title>
+  <link rel="stylesheet" href="../node_modules/@fontsource/cormorant-garamond/400.css" />
+  <link rel="stylesheet" href="../node_modules/@fontsource/cormorant-garamond/500.css" />
+  <link rel="stylesheet" href="../node_modules/@fontsource/cormorant-garamond/400-italic.css" />
+  <link rel="stylesheet" href="../node_modules/@fontsource/inter/300.css" />
+  <link rel="stylesheet" href="../node_modules/@fontsource/inter/400.css" />
+  <link rel="stylesheet" href="../node_modules/@fontsource/inter/500.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="sky"></canvas>
+  <div class="titlebar"><span class="brand-mini">✦&nbsp; Lintang</span></div>
+
+  <div class="shell">
+    <nav class="nav">
+      <div class="logo">
+        <svg viewBox="0 0 40 40" width="34" height="34"><circle cx="20" cy="20" r="17.5" fill="none" stroke="currentColor" stroke-width=".8" opacity=".5"/><path d="M20 6 L22 18 L34 20 L22 22 L20 34 L18 22 L6 20 L18 18 Z" fill="currentColor"/></svg>
+        <div><div class="logo-name">Lintang</div><div class="logo-sub">weton · shio · bintang</div></div>
+      </div>
+      <button data-view="hari" class="active"><svg class="ic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="8" cy="8" r="5.5"/><path d="M8 2.5a5.5 5.5 0 0 0 0 11z" fill="currentColor" stroke="none"/></svg>Hari Ini</button>
+      <button data-view="kalender"><svg class="ic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.1"><rect x="2" y="3" width="12" height="11" rx="1.5"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>Kalender</button>
+      <button data-view="haribaik"><svg class="ic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M8 1.8l1.7 3.6 3.9.5-2.9 2.7.8 3.9L8 10.6l-3.5 1.9.8-3.9-2.9-2.7 3.9-.5z"/></svg>Hari Baik</button>
+      <button data-view="weton"><svg class="ic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M8 1.5 14.5 8 8 14.5 1.5 8z"/><circle cx="8" cy="8" r="1.4" fill="currentColor" stroke="none"/></svg>Weton</button>
+      <button data-view="numerologi"><svg class="ic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M5 2.5 3.5 13.5M10.5 2.5 9 13.5M2.5 5.5h11M2 10.5h11"/></svg>Numerologi</button>
+      <button data-view="shio"><svg class="ic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="8" cy="8" r="6"/><path d="M8 2a3 3 0 0 1 0 6 3 3 0 0 0 0 6"/><circle cx="8" cy="5" r=".9" fill="currentColor" stroke="none"/><circle cx="8" cy="11" r=".9"/></svg>Shio</button>
+      <button data-view="tarot"><svg class="ic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.1"><rect x="4" y="1.5" width="8" height="13" rx="1.5"/><path d="M8 5.5l.8 1.7 1.7.8-1.7.8L8 10.5l-.8-1.7L5.5 8l1.7-.8z" fill="currentColor" stroke="none"/></svg>Tarot</button>
+      <button data-view="zodiak"><svg class="ic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5"/><path d="M8 2v3.5M8 10.5V14M2 8h3.5M10.5 8H14"/></svg>Zodiak</button>
+      <button data-view="jodoh"><svg class="ic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="5.8" cy="8" r="3.8"/><circle cx="10.2" cy="8" r="3.8"/></svg>Kecocokan</button>
+      <div class="nav-spacer"></div>
+      <button data-view="profil" class="nav-profile"><svg class="ic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="8" cy="5.5" r="2.8"/><path d="M2.5 14c.8-3 3-4.3 5.5-4.3s4.7 1.3 5.5 4.3"/></svg><span id="navName">Profil</span></button>
+    </nav>
+
+    <main id="main">
+      <!-- HARI INI -->
+      <section id="view-hari" class="view active"></section>
+
+      <!-- KALENDER -->
+      <section id="view-kalender" class="view"></section>
+
+      <!-- NUMEROLOGI -->
+      <section id="view-numerologi" class="view"></section>
+
+      <!-- SHIO -->
+      <section id="view-shio" class="view"></section>
+
+      <!-- HARI BAIK -->
+      <section id="view-haribaik" class="view">
+        <header class="vhead">
+          <div class="eyebrow">Petung hari baik</div>
+          <h1>Cari tanggal terbaik untuk acaramu</h1>
+          <p class="lead">Dihitung dari weton kalian, bulan Jawa, shio, fase bulan, dan langit.</p>
+        </header>
+        <div class="panel hb-form">
+          <div class="grid g4 tight">
+            <div><label>Acara</label><select id="hbAcara"></select></div>
+            <div><label>Untuk</label><select id="hbWho"></select></div>
+            <div><label>Mulai dari</label><input id="hbFrom" type="date" /></div>
+            <div><label>Rentang</label><select id="hbRange"><option value="30">30 hari</option><option value="60">60 hari</option><option value="90" selected>90 hari</option><option value="180">6 bulan</option><option value="365">1 tahun</option></select></div>
+          </div>
+          <button class="btn primary" id="hbGo">Cari hari baik</button>
+        </div>
+        <div id="hbOut"></div>
+      </section>
+
+      <!-- WETON -->
+      <section id="view-weton" class="view"></section>
+
+      <!-- TAROT -->
+      <section id="view-tarot" class="view">
+        <header class="vhead">
+          <div class="eyebrow">Tarot</div>
+          <h1>Tanyakan, lalu pilih kartumu</h1>
+        </header>
+        <div class="tarot-controls">
+          <input id="tQuestion" type="text" placeholder="Tanyakan sesuatu, mis. &quot;Apakah dia serius denganku?&quot; (opsional)" />
+          <div class="seg" id="tSpread">
+            <button data-n="1" class="on">1 kartu</button>
+            <button data-n="3">Lalu · Kini · Nanti</button>
+            <button data-n="5">Salib Kecil</button>
+          </div>
+          <button class="btn primary inline" id="tAuto">✦ Pilihkan otomatis</button>
+          <button class="btn" id="tShuffle">Kocok ulang</button>
+        </div>
+        <div id="tFan" class="fan"></div>
+        <div id="tSlots" class="slots"></div>
+        <div id="tReading" class="reading"></div>
+      </section>
+
+      <!-- ZODIAK -->
+      <section id="view-zodiak" class="view"></section>
+
+      <!-- JODOH -->
+      <section id="view-jodoh" class="view">
+        <header class="vhead">
+          <div class="eyebrow">Kecocokan</div>
+          <h1>Petung weton & langit berdua</h1>
+        </header>
+        <div class="pair">
+          <div class="panel">
+            <label>Ambil dari profil</label><select id="jAs" class="psel"></select>
+            <label>Nama pertama</label><input id="jA" type="text" placeholder="Kamu" />
+            <label>Tanggal lahir</label><input id="jAd" type="date" />
+            <label class="check"><input id="jAm" type="checkbox" /> Lahir setelah maghrib</label>
+          </div>
+          <div class="pair-mid">∞</div>
+          <div class="panel">
+            <label>Ambil dari profil</label><select id="jBs" class="psel"></select>
+            <label>Nama kedua</label><input id="jB" type="text" placeholder="Dia" />
+            <label>Tanggal lahir</label><input id="jBd" type="date" />
+            <label class="check"><input id="jBm" type="checkbox" /> Lahir setelah maghrib</label>
+          </div>
+        </div>
+        <div class="center"><button class="btn primary" id="jGo">Hitung kecocokan</button></div>
+        <div id="jOut"></div>
+      </section>
+
+      <!-- PROFIL -->
+      <section id="view-profil" class="view">
+        <header class="vhead">
+          <div class="eyebrow">Profil</div>
+          <h1>Titik awal langitmu</h1>
+          <p class="lead">Disimpan hanya di komputer ini.</p>
+        </header>
+        <div class="panel narrow">
+          <label>Nama panggilan</label><input id="pName" type="text" placeholder="mis. Rahman" />
+          <label>Nama lengkap <span class="hint">— untuk numerologi (opsional)</span></label><input id="pFull" type="text" placeholder="sesuai akta lahir" />
+          <label>Tanggal lahir</label><input id="pDate" type="date" />
+          <div class="grid g2 tight"><div><label>Jam lahir <span class="hint">— opsional</span></label><input id="pTime" type="time" /></div><div><label>Kota lahir</label><select id="pKota"></select></div></div>
+          <label class="check"><input id="pMaghrib" type="checkbox" /> Lahir setelah maghrib <span class="hint">— dalam hitungan Jawa, hari berganti saat matahari terbenam</span></label>
+          <button class="btn primary" id="pSave">Simpan</button>
+          <div id="pMsg" class="hint"></div>
+        </div>
+
+        <div class="divider"></div>
+        <h2 class="sec">Orang terdekat</h2>
+        <p class="muted" style="margin:-8px 0 16px">Simpan pasangan, keluarga, atau teman untuk dibandingkan dan dicarikan hari baik bersama.</p>
+        <div class="grid g2" style="align-items:start">
+          <div id="peopleList"></div>
+          <div class="panel">
+            <h3 id="ppTitle">Tambah orang</h3>
+            <div class="grid g2 tight">
+              <div><label>Nama</label><input id="ppName" type="text" placeholder="mis. Sari" /></div>
+              <div><label>Hubungan</label><select id="ppRel"><option>Pasangan</option><option>Keluarga</option><option>Teman</option><option>Rekan</option><option>Lainnya</option></select></div>
+            </div>
+            <label>Tanggal lahir</label><input id="ppDate" type="date" />
+            <div class="grid g2 tight"><div><label>Jam lahir <span class="hint">— opsional</span></label><input id="ppTime" type="time" /></div><div><label>Kota lahir</label><select id="ppKota"></select></div></div>
+            <label class="check"><input id="ppMaghrib" type="checkbox" /> Lahir setelah maghrib</label>
+            <div style="display:flex;gap:10px;align-items:center"><button class="btn primary" id="ppSave">Simpan orang</button><button class="btn" id="ppCancel" style="margin-top:20px;display:none">Batal</button></div>
+            <div id="ppMsg" class="hint"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal"><div class="modal-card" id="modalCard"></div></div>
+
+  <script src="data.js"></script>
+  <script src="data-jawa.js"></script>
+  <script src="data-lain.js"></script>
+  <script src="data-tarot.js"></script>
+  <script src="astro.js"></script>
+  <script src="app.js"></script>
+  <script src="features.js"></script>
+</body>
+</html>

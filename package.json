@@ -1,0 +1,41 @@
+{
+  "name": "lintang",
+  "productName": "Lintang",
+  "version": "1.1.0",
+  "description": "Weton Jawa, Shio, Numerologi, Tarot & Astrologi dalam satu langit.",
+  "main": "main.js",
+  "author": "Rahman",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis --publish never",
+    "release": "electron-builder --win nsis --publish always"
+  },
+  "build": {
+    "appId": "id.rahman.lintang",
+    "productName": "Lintang",
+    "artifactName": "Lintang-Setup-${version}.${ext}",
+    "files": ["main.js", "src/**/*", "build/icon.png"],
+    "win": { "target": ["nsis"], "icon": "build/icon.ico" },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Lintang",
+      "uninstallDisplayName": "Lintang",
+      "deleteAppDataOnUninstall": false
+    },
+    "publish": [{ "provider": "github", "owner": "rahmanatmja", "repo": "lintang", "releaseType": "release" }]
+  },
+  "dependencies": {
+    "@fontsource/cormorant-garamond": "^5.0.0",
+    "@fontsource/inter": "^5.0.0",
+    "electron-updater": "^6.3.9"
+  },
+  "devDependencies": {
+    "electron": "^33.4.11",
+    "electron-builder": "^25.1.8"
+  }
+}
